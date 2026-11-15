@@ -136,8 +136,7 @@ def fetch_fred_data(
             errors="coerce"
         )
 
-    # CPIAUCSL is a price index, not an inflation rate.
-    # Convert it to a 12-month percentage change.
+
     if indicator == "inflation" and not df.empty:
 
         # Retrieve an extra 12 months of CPI history
@@ -248,10 +247,8 @@ def get_fred_data_quality_report(df):
         )
     }
 
-
-# ============================================================
 # SELF-TEST
-# ============================================================
+
 
 if __name__ == "__main__":
 
