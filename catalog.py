@@ -7,9 +7,9 @@ Verified economic indicator definitions, country identifiers,
 and geographic classifications.
 """
 
-# ============================================================
-# 1. ECONOMIC INDICATOR CATALOG
-# ============================================================
+
+# 1. ECONOMIC INDICATOR catalog
+
 
 INDICATORS = {
     "gdp_growth": {
@@ -112,13 +112,13 @@ INDICATORS = {
 }
 
 
-# ============================================================
+
 # 2. COUNTRY CATALOG
-# ============================================================
+
 
 # ISO alpha-3 country codes.
-# This is a starter catalog, not an exhaustive global list.
-# Later we will expand it using official country metadata.
+
+
 
 COUNTRIES = {
     # North America
@@ -190,14 +190,13 @@ COUNTRIES = {
 }
 
 
-# ============================================================
-# 3. GEOGRAPHIC REGIONS
-# ============================================================
 
-# Explicit country groupings for the MVP.
+# 3. GEOGRAPHIC REGIONS
+
+
+
 # These are curated lists, not complete geographic coverage.
-# We must not present rankings as exhaustive until we load
-# a complete country classification.
+
 
 REGIONS = {
     "north_america": [
@@ -236,12 +235,6 @@ REGIONS = {
         "AUS", "NZL"
     ],
 }
-
-
-# ============================================================
-# 4. LOOKUP FUNCTIONS
-# ============================================================
-
 def get_indicator(indicator_key):
     """Return the metadata for a supported economic indicator."""
 
@@ -301,9 +294,9 @@ def list_indicators():
     }
 
 
-# ============================================================
+
 # 5. BASIC SELF-TEST
-# ============================================================
+
 
 if __name__ == "__main__":
 
