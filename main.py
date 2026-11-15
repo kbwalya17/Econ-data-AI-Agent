@@ -32,9 +32,7 @@ from router import retrieve_economic_data
 from econ_validators import validate_dataset
 
 
-# ============================================================
 # 1. ANALYSIS EXECUTION
-# ============================================================
 
 def execute_analysis(request):
     """
@@ -50,9 +48,7 @@ def execute_analysis(request):
     analysis_type = request["analysis"]
     notes = []
 
-    # --------------------------------------------------------
-    # COUNTRY ECONOMIC PROFILE
-    # --------------------------------------------------------
+
 
     if analysis_type == "profile":
 
@@ -78,14 +74,12 @@ def execute_analysis(request):
             "notes": notes,
         }
 
-    # --------------------------------------------------------
-    # OTHER ANALYSIS TYPES
-    # --------------------------------------------------------
+     # OTHER ANALYSIS TYPES
 
-    # FRED's A191RL1 is quarterly annualized GDP growth.
-    # Our current GDP growth analysis uses annual values.
-    # For U.S.-only GDP growth questions, use World Bank
-    # rather than incorrectly interpreting quarters as years.
+
+     # FRED's A191RL1 is quarterly annualized GDP growth.
+     # The current GDP growth analysis uses annual values.
+     # For U.S.-only GDP growth questions, use World Bank..
 
     if (
         request["indicator"] == "gdp_growth"
@@ -126,16 +120,13 @@ def execute_analysis(request):
             "observations are missing."
         )
 
-    # --------------------------------------------------------
+
     # RANKING
-    # --------------------------------------------------------
+
 
     if analysis_type == "ranking":
 
-        # Rankings currently require one observation
-        # per country in the requested year.
-        # This prevents monthly FRED values from
-        # being ranked as annual observations.
+
 
         if source == "fred":
             raise ValueError(
@@ -158,9 +149,9 @@ def execute_analysis(request):
                 "not a comprehensive regional ranking."
             )
 
-    # --------------------------------------------------------
+
     # COUNTRY COMPARISON
-    # --------------------------------------------------------
+ 
 
     elif analysis_type == "comparison":
 
@@ -175,9 +166,9 @@ def execute_analysis(request):
             "of available observations."
         )
 
-    # --------------------------------------------------------
+
     # HISTORICAL TREND
-    # --------------------------------------------------------
+
 
     elif analysis_type == "trend":
 
@@ -205,9 +196,8 @@ def execute_analysis(request):
     }
 
 
-# ============================================================
-# 2. PREPARE RESULTS FOR AI INTERPRETATION
-# ============================================================
+ # 2. PREPARE RESULTS FOR AI INTERPRETATION
+
 
 def prepare_briefing_results(execution):
     """
@@ -251,9 +241,9 @@ def prepare_briefing_results(execution):
     }
 
 
-# ============================================================
-# 3. MAIN ECONOMIC RESEARCH PIPELINE
-# ============================================================
+
+ # 3. MAIN ECONOMIC RESEARCH PIPELINE
+
 
 def run_econ_agent(
     question,
@@ -350,9 +340,9 @@ def run_econ_agent(
     }
 
 
-# ============================================================
-# 4. DISPLAY RESULTS IN THE TERMINAL
-# ============================================================
+
+ # 4. Display res in terminal...
+
 
 def display_results(result):
     """Display the research output in the terminal."""
@@ -416,9 +406,9 @@ def display_results(result):
     print("\n" + "=" * 65)
 
 
-# ============================================================
+
 # 5. SELF-TEST
-# ============================================================
+
 
 if __name__ == "__main__":
 
