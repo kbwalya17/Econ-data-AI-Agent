@@ -22,9 +22,9 @@ from cleaning import clean_economic_data, get_available_data
 from worldbank import fetch_worldbank_data
 
 
-# ============================================================
+
 # 1. COUNTRY RANKINGS
-# ============================================================
+
 
 def rank_countries(
     df,
@@ -77,8 +77,7 @@ def rank_countries(
         ascending=[ascending, True]
     ).reset_index(drop=True)
 
-    # Rank represents position in the sorted results.
-    # Equal values receive the same statistical rank.
+    
     available["Rank"] = (
         available["Value"]
         .rank(
@@ -121,9 +120,9 @@ def rank_countries(
     }
 
 
-# ============================================================
-# 2. COUNTRY COMPARISONS
-# ============================================================
+
+ # 2. COUNTRY COMPARISONS
+
 
 def compare_countries(
     df,
@@ -162,8 +161,7 @@ def compare_countries(
             "Comparisons require exactly one indicator."
         )
 
-    # Avoid treating monthly and annual observations
-    # as interchangeable.
+    
     if data["Frequency"].nunique() != 1:
         raise ValueError(
             "Mixed data frequencies are not supported."
@@ -209,9 +207,9 @@ def compare_countries(
     )
 
 
-# ============================================================
-# 3. HISTORICAL TREND ANALYSIS
-# ============================================================
+
+ # 3. HISTORICAL TREND ANALYSIS
+
 
 def analyze_trend(df, country_code):
     """
@@ -289,9 +287,9 @@ def analyze_trend(df, country_code):
     }
 
 
-# ============================================================
-# 4. COUNTRY ECONOMIC PROFILES
-# ============================================================
+
+ # 4. COUNTRY ECONOMIC PROFILES
+
 
 def build_country_profile(
     country_code,
@@ -373,17 +371,15 @@ def build_country_profile(
     }
 
 
-# ============================================================
+
 # 5. SELF-TEST
-# ============================================================
+
 
 if __name__ == "__main__":
 
     print("\nECON AI AGENT — ANALYTICS TEST")
 
-    # --------------------------------------------------------
-    # TEST 1: GDP Growth Rankings, 2008
-    # --------------------------------------------------------
+    
 
     print("\nTEST 1: GDP Growth Rankings — 2008")
 
@@ -407,9 +403,7 @@ if __name__ == "__main__":
         rankings["missing_countries"].to_string(index=False)
     )
 
-    # --------------------------------------------------------
-    # TEST 2: Country Comparison
-    # --------------------------------------------------------
+    
 
     print("\nTEST 2: Zambia, Kenya, Ghana GDP Growth")
 
@@ -428,9 +422,7 @@ if __name__ == "__main__":
         comparison.to_string(index=False)
     )
 
-    # --------------------------------------------------------
-    # TEST 3: Zambia Historical Trend
-    # --------------------------------------------------------
+    
 
     print("\nTEST 3: Zambia GDP Growth Trend")
 
@@ -443,9 +435,7 @@ if __name__ == "__main__":
         if key != "data":
             print(f"{key}: {value}")
 
-    # --------------------------------------------------------
-    # TEST 4: Zambia Economic Profile
-    # --------------------------------------------------------
+    
 
     print("\nTEST 4: Zambia Economic Profile")
 
