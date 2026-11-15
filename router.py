@@ -25,9 +25,8 @@ from fred import fetch_fred_data
 from cleaning import clean_economic_data
 
 
-# ============================================================
 # 1. SOURCE SELECTION
-# ============================================================
+
 
 def select_data_source(request):
     """
@@ -69,9 +68,8 @@ def select_data_source(request):
     )
 
 
-# ============================================================
 # 2. FRED DATE HANDLING
-# ============================================================
+
 
 def get_fred_dates(request):
     """
@@ -92,9 +90,9 @@ def get_fred_dates(request):
     )
 
 
-# ============================================================
+
 # 3. DATA RETRIEVAL
-# ============================================================
+
 
 def retrieve_economic_data(request):
     """
@@ -190,17 +188,16 @@ def retrieve_economic_data(request):
     }
 
 
-# ============================================================
 # 4. SELF-TEST
-# ============================================================
+
 
 if __name__ == "__main__":
 
     print("\nECON AI AGENT — ROUTER TEST")
 
-    # --------------------------------------------------------
+
     # TEST 1: Zambia GDP Growth
-    # --------------------------------------------------------
+
 
     print("\nTEST 1: Zambia GDP Growth → World Bank")
 
@@ -221,9 +218,9 @@ if __name__ == "__main__":
         zambia["data"].tail(5).to_string(index=False)
     )
 
-    # --------------------------------------------------------
+
     # TEST 2: U.S. Unemployment
-    # --------------------------------------------------------
+
 
     print("\nTEST 2: U.S. Unemployment → FRED")
 
@@ -242,9 +239,9 @@ if __name__ == "__main__":
         us["data"].tail(5).to_string(index=False)
     )
 
-    # --------------------------------------------------------
+
     # TEST 3: Cross-Country Comparison
-    # --------------------------------------------------------
+
 
     print(
         "\nTEST 3: Zambia vs U.S. Inflation "
@@ -268,9 +265,9 @@ if __name__ == "__main__":
         comparison["data"].to_string(index=False)
     )
 
-    # --------------------------------------------------------
+
     # TEST 4: Explicit Country Ranking
-    # --------------------------------------------------------
+
 
     print(
         "\nTEST 4: North America GDP Growth "
