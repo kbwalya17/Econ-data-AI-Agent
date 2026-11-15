@@ -22,14 +22,12 @@ import pandas as pd
 from catalog import INDICATORS, COUNTRIES, REGIONS
 
 
-# ============================================================
 # 1. BASIC VALIDATION
-# ============================================================
+
 
 MIN_YEAR = 1960
 
-# A future year may be valid for some forecasts, but
-# this agent analyzes historical observations only.
+
 MAX_YEAR = datetime.now().year
 
 COUNTRY_CODE_TO_NAME = {
@@ -175,13 +173,7 @@ def validate_year_range(start_year, end_year):
     return start, end
 
 
-# ============================================================
-# 2. REGION VALIDATION
-# ============================================================
 
-# Our current region catalog is curated and incomplete.
-# Until we introduce complete geographic metadata,
-# all catalog regions must be treated as partial samples.
 
 REGION_COVERAGE = {
     region: "partial"
@@ -246,9 +238,9 @@ def validate_region_ranking(region, comprehensive=False):
     return result
 
 
-# ============================================================
+
 # 3. ANALYSIS REQUEST VALIDATION
-# ============================================================
+
 
 SUPPORTED_ANALYSES = {
     "ranking",
@@ -438,11 +430,6 @@ def validate_analysis_request(request):
 
     return validated
 
-
-# ============================================================
-# 4. DATASET VALIDATION
-# ============================================================
-
 def validate_dataset(df, require_values=True):
     """
     Check the integrity of a retrieved dataset.
@@ -507,9 +494,7 @@ def validate_dataset(df, require_values=True):
     }
 
 
-# ============================================================
 # 5. SELF-TEST
-# ============================================================
 
 if __name__ == "__main__":
 
