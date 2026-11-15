@@ -4,7 +4,7 @@ Econ AI Agent
 Module: main.py
 
 Connect natural-language understanding, data retrieval,
-economic analysis, AI interpretation, and Excel export.
+economic analysis, AI interpretation, and Excel export..
 
 Python performs all numerical calculations.
 Gemini interprets the question and explains the results.
