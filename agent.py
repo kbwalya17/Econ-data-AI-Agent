@@ -26,15 +26,15 @@ from catalog import INDICATORS, COUNTRIES, REGIONS
 from econ_validators import validate_analysis_request
 
 
-# ============================================================
-# 1. GEMINI CONFIGURATION
-# ============================================================
+
+ # 1. GEMINI CONFIGURATION
+
 
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-# This model worked in our earlier prototype.
+
 MODEL_NAME = "gemini-3.5-flash-lite"
 
 
@@ -49,9 +49,9 @@ def get_gemini_client():
     return genai.Client(api_key=GEMINI_API_KEY)
 
 
-# ============================================================
-# 2. NATURAL LANGUAGE QUESTION PARSING
-# ============================================================
+
+ # 2. NATURAL LANGUAGE QUESTION PARSING
+
 
 def parse_economic_question(question):
     """
@@ -186,7 +186,7 @@ USER QUESTION:
 
     text = (response.text or "").strip()
 
-    # Remove optional markdown code fences.
+    
     text = re.sub(
         r"^```(?:json)?\s*",
         "",
@@ -212,13 +212,13 @@ USER QUESTION:
     if "error" in parsed:
         raise ValueError(str(parsed["error"]))
 
-    # Python is the final authority on valid requests.
+    
     return validate_analysis_request(parsed)
 
 
-# ============================================================
-# 3. PREPARE VERIFIED RESULTS FOR GEMINI
-# ============================================================
+
+ # 3. PREPARE VERIFIED RESULTS FOR GEMINI
+
 
 def make_json_safe(value):
     """
@@ -255,7 +255,7 @@ def make_json_safe(value):
     if isinstance(value, pd.Timedelta):
         return str(value)
 
-    # Handle NumPy scalar types.
+    
     if hasattr(value, "item"):
         try:
             return make_json_safe(value.item())
@@ -276,9 +276,9 @@ def make_json_safe(value):
     return str(value)
 
 
-# ============================================================
-# 4. GROUNDED ECONOMIC INTERPRETATION
-# ============================================================
+
+ # 4. GROUNDED ECONOMIC INTERPRETATION
+
 
 def explain_economic_results(
     question,
@@ -362,17 +362,15 @@ Write a concise economic briefing with:
     return explanation
 
 
-# ============================================================
+
 # 5. SELF-TEST
-# ============================================================
+
 
 if __name__ == "__main__":
 
     print("\nECON AI AGENT — GEMINI TEST")
 
-    # --------------------------------------------------------
-    # TEST 1: Parse a ranking question
-    # --------------------------------------------------------
+   
 
     print("\nTEST 1: Natural Language Ranking")
 
@@ -387,9 +385,7 @@ if __name__ == "__main__":
 
     print(json.dumps(parsed_1, indent=2))
 
-    # --------------------------------------------------------
-    # TEST 2: Parse a comparison question
-    # --------------------------------------------------------
+    
 
     print("\nTEST 2: Country Comparison")
 
@@ -404,13 +400,11 @@ if __name__ == "__main__":
 
     print(json.dumps(parsed_2, indent=2))
 
-    # --------------------------------------------------------
-    # TEST 3: Grounded economic explanation
-    # --------------------------------------------------------
+ 
 
     print("\nTEST 3: Grounded Interpretation")
 
-    # Illustrative test values, NOT actual economic data.
+    
     sample_results = {
         "test_data_only": True,
         "indicator": "gdp_growth",
