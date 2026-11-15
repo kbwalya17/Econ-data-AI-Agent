@@ -177,7 +177,7 @@ def fetch_worldbank_data(
         )
 
     # Construct the complete country-year grid.
-    # This ensures missing observations remain visible.
+
     grid = pd.MultiIndex.from_product(
         [countries, range(start_year, end_year + 1)],
         names=["Country_Code", "Year"]
@@ -270,9 +270,9 @@ def get_data_quality_report(df):
     return report
 
 
-# ============================================================
-# SELF-TEST
-# ============================================================
+
+# SELF TEST
+
 
 if __name__ == "__main__":
 
