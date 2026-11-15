@@ -26,9 +26,9 @@ from main import run_econ_agent
 from excel import extract_analysis_table
 
 
-# ============================================================
+
 # 1. PAGE CONFIGURATION
-# ============================================================
+
 
 st.set_page_config(
     page_title="Econ AI Agent | Economic Intelligence",
@@ -38,9 +38,9 @@ st.set_page_config(
 )
 
 
-# ============================================================
+
 # 2. CUSTOM STYLING
-# ============================================================
+
 
 st.markdown(
     """
@@ -97,9 +97,9 @@ st.markdown(
 )
 
 
-# ============================================================
+
 # 3. HELPER FUNCTIONS
-# ============================================================
+
 
 def get_result_table(analysis_result):
     """Convert analysis output into a displayable table."""
@@ -155,9 +155,9 @@ def make_chart(data, request):
         else ""
     )
 
-    # --------------------------------------------------------
+   
     # RANKINGS: HORIZONTAL BAR CHART
-    # --------------------------------------------------------
+
 
     if analysis_type == "ranking":
 
@@ -208,21 +208,18 @@ def make_chart(data, request):
 
         return fig
 
-    # --------------------------------------------------------
-    # COUNTRY PROFILE: MULTIPLE INDICATORS
-    # --------------------------------------------------------
+     # COUNTRY PROFILE: MULTIPLE INDICATORS
+
 
     if analysis_type == "profile":
 
-        # Different indicators have different units.
-        # Never place all profile indicators on one
-        # shared numerical axis.
+        # diff indicators have diff units
+
 
         return None
 
-    # --------------------------------------------------------
+
     # COMPARISONS AND TRENDS
-    # --------------------------------------------------------
 
     x_axis = (
         "Date"
@@ -340,9 +337,9 @@ def show_data_quality(data):
     col4.metric("Coverage", f"{coverage:.1f}%")
 
 
-# ============================================================
+
 # 4. SIDEBAR
-# ============================================================
+ # ==============
 
 with st.sidebar:
 
@@ -403,9 +400,9 @@ with st.sidebar:
     )
 
 
-# ============================================================
-# 5. MAIN PAGE
-# ============================================================
+
+ # 5. MAIN PAGE
+ # ========   ==========================
 
 st.markdown(
     """
@@ -430,9 +427,9 @@ st.caption(
 )
 
 
-# ============================================================
+
 # 6. EXAMPLE QUESTIONS
-# ============================================================
+
 
 examples = [
     "Compare GDP growth in Zambia, Kenya, and Ghana between 2000 and 2024.",
@@ -465,9 +462,9 @@ if selected_example != "Write my own question":
     )
 
 
-# ============================================================
+
 # 7. QUESTION INPUT
-# ============================================================
+
 
 with st.form("research_form"):
 
@@ -488,9 +485,9 @@ with st.form("research_form"):
     )
 
 
-# ============================================================
-# 8. RUN RESEARCH PIPELINE
-# ============================================================
+
+ # 8. RUN RESEARCH PIPELINE
+
 
 if submitted:
 
@@ -528,9 +525,9 @@ if submitted:
                 st.info(str(error))
 
 
-# ============================================================
+
 # 9. DISPLAY RESEARCH RESULTS
-# ============================================================
+
 
 result = st.session_state.get("research_result")
 
@@ -548,9 +545,9 @@ if result is not None:
     data = result["economic_data"]
     analysis_result = result["analysis_result"]
 
-    # --------------------------------------------------------
-    # SOURCE INFORMATION
-    # --------------------------------------------------------
+   
+    # Source information
+    
 
     col1, col2, col3 = st.columns(3)
 
@@ -569,9 +566,7 @@ if result is not None:
         data["Country_Code"].nunique()
     )
 
-    # --------------------------------------------------------
-    # AI BRIEFING
-    # --------------------------------------------------------
+    
 
     st.subheader("Economic Briefing")
 
@@ -580,9 +575,9 @@ if result is not None:
     else:
         st.info("No AI briefing was generated.")
 
-    # --------------------------------------------------------
-    # ANALYSIS RESULTS
-    # --------------------------------------------------------
+     # ------   ----=
+     # ANALYSIS RESULTS
+     # -----------
 
     st.subheader("Statistical Results")
 
@@ -603,10 +598,8 @@ if result is not None:
             "for this analysis."
         )
 
-    # --------------------------------------------------------
-    # CHARTS
-    # --------------------------------------------------------
-
+    
+  
     if request["analysis"] == "profile":
 
         show_profile_charts(data)
@@ -624,17 +617,17 @@ if result is not None:
                 use_container_width=True,
             )
 
-    # --------------------------------------------------------
-    # DATA QUALITY
-    # --------------------------------------------------------
+   
+    # Data quality
+   
 
     st.subheader("Data Coverage")
 
     show_data_quality(data)
 
-    # --------------------------------------------------------
+   
     # METHODOLOGY AND RAW DATA
-    # --------------------------------------------------------
+
 
     with st.expander(
         "View Underlying Economic Data"
@@ -675,9 +668,8 @@ if result is not None:
             "interpretation of those results."
         )
 
-    # --------------------------------------------------------
-    # EXCEL DOWNLOAD
-    # --------------------------------------------------------
+  
+    # EXCEL
 
     st.subheader("Download Research Report")
 
@@ -701,9 +693,6 @@ if result is not None:
         )
 
 
-# ============================================================
-# 10. FOOTER
-# ============================================================
 
 st.divider()
 
