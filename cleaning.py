@@ -79,7 +79,7 @@ def clean_economic_data(df):
         .str.upper()
     )
 
-    # World Bank observations are typically annual.
+    
     if "Date" not in data.columns:
         data["Year"] = pd.to_numeric(
             data["Year"],
@@ -100,12 +100,10 @@ def clean_economic_data(df):
 
         data["Year"] = data["Date"].dt.year
 
-        # Preserve the original frequency distinction.
-        # FRED's catalog metadata can later supply
-        # a more specific frequency for each series.
+        
         data["Frequency"] = "Time Series"
 
-    # Preserve optional metadata.
+
     for column in STANDARD_COLUMNS:
         if column not in data.columns:
             data[column] = pd.NA
@@ -113,8 +111,8 @@ def clean_economic_data(df):
     # Flag missing economic observations.
     data["Missing"] = data["Value"].isna()
 
-    # Remove duplicate observations only when identical
-    # in their economic identifying fields.
+    # Removes duplicate observations only when identical
+    
     duplicate_keys = [
         "Country_Code",
         "Date",
@@ -217,9 +215,9 @@ def get_available_data(df):
     ].copy()
 
 
-# ============================================================
+
 # SELF-TEST
-# ============================================================
+
 
 if __name__ == "__main__":
 
@@ -228,9 +226,9 @@ if __name__ == "__main__":
 
     print("\nECON AI AGENT — CLEANING TEST")
 
-    # --------------------------------------------------------
+   
     # TEST 1: World Bank annual data
-    # --------------------------------------------------------
+    
 
     print("\nTEST 1: World Bank GDP Growth")
 
@@ -252,9 +250,9 @@ if __name__ == "__main__":
         summarize_missing_data(wb_clean).to_string(index=False)
     )
 
-    # --------------------------------------------------------
+ 
     # TEST 2: FRED monthly data
-    # --------------------------------------------------------
+
 
     print("\nTEST 2: FRED Unemployment")
 
