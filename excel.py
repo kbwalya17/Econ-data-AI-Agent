@@ -30,9 +30,8 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 from catalog import INDICATORS
 
 
-# ============================================================
 # 1. FORMATTING
-# ============================================================
+
 
 NAVY = "17365D"
 BLUE = "DCEAF7"
@@ -77,7 +76,7 @@ def safe_excel_value(value):
         return None
 
     if isinstance(value, str):
-        # Prevent untrusted text from becoming Excel formulas.
+        # Preventing untrusted text from becoming Excel formulas.
         if value.lstrip().startswith(("=", "+", "-", "@")):
             return "'" + value
         return value
@@ -193,9 +192,7 @@ def dataframe_to_sheet(wb, sheet_name, df):
     return ws
 
 
-# ============================================================
 # 2. ANALYSIS RESULTS
-# ============================================================
 
 def extract_analysis_table(analysis_result):
     """
@@ -246,10 +243,7 @@ def extract_analysis_table(analysis_result):
         columns=["Statistic", "Value"]
     )
 
-
-# ============================================================
 # 3. DATA QUALITY
-# ============================================================
 
 def create_data_quality_table(df):
     """
@@ -305,9 +299,7 @@ def create_data_quality_table(df):
     return quality
 
 
-# ============================================================
 # 4. METHODOLOGY
-# ============================================================
 
 def create_methodology_table(
     question,
@@ -414,9 +406,7 @@ def create_methodology_table(
     )
 
 
-# ============================================================
 # 5. GENERATE EXCEL WORKBOOK
-# ============================================================
 
 def create_excel_report(
     question,
@@ -472,17 +462,17 @@ def create_excel_report(
 
     wb = Workbook()
 
-    # Remove the default empty worksheet.
+    # Removes the default empty worksheet.
     wb.remove(wb.active)
 
-    # 1. Underlying economic observations
+    
     dataframe_to_sheet(
         wb,
         "Economic Data",
         economic_data
     )
 
-    # 2. Calculated analysis results
+
     results_table = extract_analysis_table(
         analysis_result
     )
@@ -493,7 +483,7 @@ def create_excel_report(
         results_table
     )
 
-    # 3. Data quality and missingness
+
     quality_table = create_data_quality_table(
         economic_data
     )
@@ -504,7 +494,7 @@ def create_excel_report(
         quality_table
     )
 
-    # 4. Research methodology
+
     methodology_table = create_methodology_table(
         question,
         request,
@@ -518,7 +508,7 @@ def create_excel_report(
         methodology_table
     )
 
-    # 5. Optional AI interpretation
+
     if ai_briefing:
         ws = wb.create_sheet("AI Briefing")
 
@@ -534,7 +524,7 @@ def create_excel_report(
         )
         ws.row_dimensions[2].height = 300
 
-    # Save to memory, then optionally to disk.
+
     buffer = BytesIO()
     wb.save(buffer)
 
@@ -551,16 +541,14 @@ def create_excel_report(
     return excel_bytes
 
 
-# ============================================================
+
 # 6. SELF-TEST
-# ============================================================
 
 if __name__ == "__main__":
 
     print("\nECON AI AGENT — EXCEL TEST")
 
-    # Synthetic test observations.
-    # No API call is needed for this test.
+
     test_data = pd.DataFrame({
         "Country": [
             "Zambia", "Zambia",
@@ -617,7 +605,7 @@ if __name__ == "__main__":
         output_path=output
     )
 
-    # Verify the generated workbook can be opened.
+    # Verifying the generated workbook can be opened.
     check = load_workbook(
         output,
         read_only=True
